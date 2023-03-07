@@ -75,6 +75,33 @@
 
                     <p class="card-text">
                         {{ inspection.description | linebreaks }}
+                        Queen: 
+                        {% if inspection.queen == True %}
+                            visible
+                        {% else %}
+                            not visible
+                        {% endif %}
+                        <br>
+                        Eggs: 
+                        {% if inspection.eggs == True %}
+                            visible
+                        {% else %}
+                            not visible
+                        {% endif %}
+                        <br>
+                        Open brood: 
+                        {% if inspection.open_brood == True %}
+                            visible
+                        {% else %}
+                            not visible
+                        {% endif %}
+                        <br>
+                        Sealed brood: 
+                        {% if inspection.sealed_brood == True %}
+                            visible
+                        {% else %}
+                            not visible
+                        {% endif %}
                     </p>
                     </div>
                 </div>
