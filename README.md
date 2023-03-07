@@ -2,7 +2,7 @@
 Hive management for beekeepers
 <br>
 Still in development - 07-03-2023
-<br>
+<br><br>
 To run the application you need python and django
 <br>
 To install django:
@@ -12,6 +12,8 @@ pip install django
 Next create database:
 ```
 python3 manage.py makemigrations
+```
+```
 python3 manage.py migrate
 ```
 Start the local django server:
