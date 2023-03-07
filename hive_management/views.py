@@ -7,22 +7,6 @@ def homepage(request):
     return render(request, 'homepage.html', {})
 
 def hive_management(request):
-    if request.method == 'POST':
-        new_hive_post = AddHiveForm(request.POST)
-        if new_hive_post.is_valid():
-            post = Hive(
-                name = new_hive_post.cleaned_data['name'],
-                location = new_hive_post.cleaned_data['location'],
-                description = new_hive_post.cleaned_data['description'],
-                supers = new_hive_post.cleaned_data['supers'],
-                frames = new_hive_post.cleaned_data['frames'],
-                color = new_hive_post.cleaned_data['color'],
-                purpose = new_hive_post.cleaned_data['purpose'],
-                strength = new_hive_post.cleaned_data['strength'],
-                created_on = new_hive_post.cleaned_data['created_on']
-            )
-            post.save()
-
     hives = Hive.objects.all().order_by('-created_on')
     context = {
         "hives": hives,
@@ -42,6 +26,22 @@ def donate(request):
     return render(request, 'donate.html', {})
 
 def new_hive(request):
+    if request.method == 'POST':
+        new_hive_post = AddHiveForm(request.POST)
+        if new_hive_post.is_valid():
+            post = Hive(
+                name = new_hive_post.cleaned_data['name'],
+                location = new_hive_post.cleaned_data['location'],
+                description = new_hive_post.cleaned_data['description'],
+                supers = new_hive_post.cleaned_data['supers'],
+                frames = new_hive_post.cleaned_data['frames'],
+                color = new_hive_post.cleaned_data['color'],
+                purpose = new_hive_post.cleaned_data['purpose'],
+                strength = new_hive_post.cleaned_data['strength'],
+                created_on = new_hive_post.cleaned_data['created_on']
+            )
+            post.save()
+            return redirect("hive_detail", pk=post.pk)
     context = {
         'form': AddHiveForm,
     }
@@ -53,7 +53,7 @@ def edit_hive(request, pk):
 
     if form.is_valid():
         form.save()
-        return redirect("hive_management")
+        return redirect("hive_detail", pk=hive.pk)
 
     context = {
         "hive": hive,
@@ -89,6 +89,6 @@ def add_note(request, pk):
                 hive = hive
             )
             note.save()
-            return redirect("hive_management")
+            return redirect("hive_detail", pk=hive.pk)
 
     return render(request, "add_note.html", context)
