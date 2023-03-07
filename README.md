@@ -2,7 +2,7 @@
 Hive management for beekeepers
 <br>
 Still in development - 07-03-2023
-<br><br>
+# Run the application
 To run the application you need python and django
 <br>
 To install django:
