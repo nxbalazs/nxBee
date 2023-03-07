@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<div class="container-fluid" style="background-color: #f0dbb0;">
+<div class="container-fluid">
 
     <br>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #efb680;">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <div class="navbar-brand">Actions:</div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 <div class="row row-cols-1 row-cols-md-5 g-4">
 {% for hive in hives %}
     <div class="col">
-        <div class="card" style="background-color: #efb680;">
+        <div class="card">
             <div class="card-body">
             <h5 class="card-title"><a href="{% url 'hive_detail' hive.pk %}" class="link-secondary">{{ hive.name }}</a></h5>
             <hr style="color: {{ hive.color }}; height: 10px; margin: 0;">

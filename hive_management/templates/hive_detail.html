@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<div class="container-fluid" style="background-color: #f0dbb0;">
+<div class="container-fluid">
     
 <br>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #efb680;">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <div class="navbar-brand">Actions:</div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
       <br>
 
     <div class="col">
-        <div class="card" style="background-color: #efb680;">
+        <div class="card">
             <div class="card-body">
             <h4 class="card-title">{{ hive.name }}</h4>
             <hr style="color: {{ hive.color }}; height: 10px; margin: 0;">
@@ -55,17 +55,36 @@
             </div>
         </div>
         <br>
-        {% for note in notes %}
-        <div class="card" style="background-color: #efb680;">
-            <div class="card-body">
-            <h6 class="card-title">{{ note.title }} - {{ note.created_on }}</h6>
+        
 
-            <p class="card-text">
-                {{ note.body | linebreaks }}
-            </p>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab" aria-controls="contact" aria-selected="false">Notes</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+            <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="contact-tab">
+                {% for note in notes %}
+                <div class="card">
+                    <div class="card-body">
+                    <h6 class="card-title">{{ note.title }} - {{ note.created_on }}</h6>
+
+                    <p class="card-text">
+                        {{ note.body | linebreaks }}
+                    </p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-        </div>
-        {% endfor %}
+          </div>
 
     </div>
     <br>&nbsp;
