@@ -19,19 +19,19 @@
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'edit_hive' hive.pk %}">Edit hive details</a>
+                            <a class="nav-link" href="{% url 'edit_hive' hive.pk %}">Edit hive details <i class="bi bi-pencil"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add_inspection' hive.pk %}">Add an inspection to this hive</a>
+                            <a class="nav-link" href="{% url 'add_inspection' hive.pk %}">Add an inspection to this hive <i class="bi bi-binoculars"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="{% url 'new_hive' %}">Add a treatment to this hive</a>
+                            <a class="nav-link disabled" href="{% url 'new_hive' %}">Add a treatment to this hive <i class="bi bi-file-medical"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add_note' hive.pk %}">Add a note to this hive</a>
+                            <a class="nav-link" href="{% url 'add_note' hive.pk %}">Add a note to this hive <i class="bi bi-card-text"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'remove_hive' hive.pk %}">Remove this hive</a>
+                            <a class="nav-link" href="{% url 'remove_hive' hive.pk %}">Remove this hive <i class="bi bi-file-x"></i></a>
                         </li>
                     </ul>
                   </div>

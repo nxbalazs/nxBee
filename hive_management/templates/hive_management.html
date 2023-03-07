@@ -14,7 +14,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'new_hive' %}">Add a new hive</a>
+                    <a class="nav-link" href="{% url 'new_hive' %}">Add a new hive <i class="bi bi-file-plus"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="{% url 'new_hive' %}">New treatment</a>
@@ -49,7 +49,7 @@
                 <br>
                 Location: {{ hive.location }}
                 <br>
-                <small><a href="{% url 'edit_hive' hive.pk %}" class="link-primary">edit</a></small>
+                <small><a href="{% url 'edit_hive' hive.pk %}" class="link-primary">edit <i class="bi bi-pencil"></i></a></small>
             </p>
             </div>
         </div>
