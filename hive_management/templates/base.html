@@ -24,17 +24,17 @@
                 <a class="nav-link" href="{% url 'hive_management' %}">Hive Management</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'donate' %}">Tutorials</a>
+                <a class="nav-link disabled" href="{% url 'donate' %}">Tutorials</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'donate' %}">Donate</a>
+                <a class="nav-link disabled" href="{% url 'donate' %}">Donate</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Todo</a>
               </li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search hive" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Search hive/note" aria-label="Search">
                 <button class="btn" type="submit">Search</button>
             </form>
           </div>

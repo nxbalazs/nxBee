@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from hive_management.models import Hive, Note
+from hive_management.models import Hive, Note, Inspection, Treatment
 from hive_management.forms import AddHiveForm, NoteForm
 
 # Create your views here.
@@ -16,9 +16,13 @@ def hive_management(request):
 def hive_detail(request, pk):
     hive = Hive.objects.get(pk=pk)
     notes = Note.objects.filter(hive=hive).order_by('-created_on')
+    inspections = Inspection.objects.filter(hive=hive).order_by('-created_on')
+    treatments = Treatment.objects.filter(hive=hive).order_by('-created_on')
     context = {
         "hive": hive,
-        "notes": notes
+        "notes": notes,
+        "inspections": inspections,
+        "treatments": treatments
     }
     return render(request, 'hive_detail.html', context)
 

@@ -2,44 +2,40 @@
 
 {% block page_content %}
 <div class="container-fluid">
-    
-<br>
-
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <div class="navbar-brand">Actions:</div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'edit_hive' hive.pk %}">Edit hive details</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'new_hive' %}">Add a treatment to this hive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'new_hive' %}">Add an inspection to this hive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_note' hive.pk %}">Add a note to this hive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'remove_hive' hive.pk %}">Remove this hive</a>
-                </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <br>
 
     <div class="col">
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">{{ hive.name }}</h5>
             <hr style="color: {{ hive.color }}; height: 10px; margin: 0;">
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                  <div class="navbar-brand">Actions:</div>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'edit_hive' hive.pk %}">Edit hive details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'new_hive' %}">Add a treatment to this hive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'new_hive' %}">Add an inspection to this hive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_note' hive.pk %}">Add a note to this hive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'remove_hive' hive.pk %}">Remove this hive</a>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
 
             <p class="card-text">
                 {{ hive.description | linebreaks }}
@@ -69,8 +65,34 @@
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="inspections" role="tabpanel" aria-labelledby="home-tab">inspections</div>
-            <div class="tab-pane fade" id="treatments" role="tabpanel" aria-labelledby="profile-tab">treatments</div>
+            <div class="tab-pane fade show active" id="inspections" role="tabpanel" aria-labelledby="home-tab">
+                {% for inspection in inspections %}
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                    <h6 class="card-title">{{ inspection.name }} - {{ inspection.created_on }}</h6>
+
+                    <p class="card-text">
+                        {{ inspection.description | linebreaks }}
+                    </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="tab-pane fade" id="treatments" role="tabpanel" aria-labelledby="profile-tab">
+                {% for treatment in treatments %}
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                    <h6 class="card-title">{{ treatment.name }} - {{ treatment.created_on }}</h6>
+
+                    <p class="card-text">
+                        {{ treatment.description | linebreaks }}
+                    </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="contact-tab">
                 {% for note in notes %}
                 <br>
