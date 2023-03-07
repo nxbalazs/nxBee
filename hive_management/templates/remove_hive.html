@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="container-sm" style="background-color: #f0dbb0;">
+    <br>&nbsp;
+    <h5>Remove hive {{ hive.name }}?</h5>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Remove" class="form-control">
+        <a href="{% url 'hive_management' %}" class="link-secondary">Cancel</a>
+    </form>
+    <br>
+</div>
+{% endblock %}

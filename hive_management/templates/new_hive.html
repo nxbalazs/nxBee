@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="container-sm" style="background-color: #f0dbb0;">
+    <br>&nbsp;
+    <h5>Add new hive:</h5>
+    <form action="{% url 'hive_management' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" class="form-control">
+    </form>
+    <br>
+</div>
+{% endblock %}
