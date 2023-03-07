@@ -36,7 +36,8 @@
         <div class="card">
             <div class="card-body">
             <h5 class="card-title"><a href="{% url 'hive_detail' hive.pk %}" class="link-primary">{{ hive.name }}</a></h5>
-            <hr style="color: {{ hive.color }}; height: 10px; margin: 0;">
+            <h6 class="card-subtitle mb-2 text-muted">{{ hive.created_on }}</h6>
+            <p class="lead" style="background-color: {{ hive.color }}; font-size: 5px;">&nbsp;</p>
             <p class="card-text">
                 {{ hive.description | linebreaks }}
                 <br>

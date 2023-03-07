@@ -1,5 +1,5 @@
 from django import forms
-from hive_management.models import Hive, Note
+from hive_management.models import Hive, Inspection
 
 class AddHiveForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,20 @@ class AddHiveForm(forms.ModelForm):
 class NoteForm(forms.Form):
     title = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Note title'}))
     body = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Leave a note'}))
+
+class AddInspectionForm(forms.ModelForm):
+    queen = forms.BooleanField(initial=True, required=False)
+    eggs = forms.BooleanField(initial=True, required=False)
+    open_brood = forms.BooleanField(initial=True, required=False)
+    sealed_brood = forms.BooleanField(initial=True, required=False)
+    class Meta:
+        model = Inspection
+        fields = '__all__'
+        exclude = ('hive',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inspection title'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'honey': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Honey'}),
+            'varroa': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Varroa'}),
+            'created_on': forms.DateInput(attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}),
+        }

@@ -9,5 +9,6 @@ urlpatterns = [
     path('hive_detail/<int:pk>', views.hive_detail, name='hive_detail'),
     path('remove_hive/<int:pk>', views.remove_hive, name='remove_hive'),
     path('add_note/<int:pk>', views.add_note, name='add_note'),
+    path('add_inspection/<int:pk>', views.add_inspection, name='add_inspection'),
     path('donate', views.donate, name='donate'),
 ]

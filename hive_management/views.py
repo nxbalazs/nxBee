@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from hive_management.models import Hive, Note, Inspection, Treatment
-from hive_management.forms import AddHiveForm, NoteForm
+from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm
 
 # Create your views here.
 def homepage(request):
@@ -96,3 +96,29 @@ def add_note(request, pk):
             return redirect("hive_detail", pk=hive.pk)
 
     return render(request, "add_note.html", context)
+
+def add_inspection(request, pk):
+    hive = Hive.objects.get(pk=pk)
+    context = {
+        'hive': hive,
+        'form': AddInspectionForm,
+    }
+
+    if request.method == 'POST':
+        add_inspection_form = AddInspectionForm(request.POST)
+        if add_inspection_form.is_valid():
+            inspection = Inspection(
+                name = add_inspection_form.cleaned_data['name'],
+                description = add_inspection_form.cleaned_data['description'],
+                queen = add_inspection_form.cleaned_data['queen'],
+                eggs = add_inspection_form.cleaned_data['eggs'],
+                open_brood = add_inspection_form.cleaned_data['open_brood'],
+                sealed_brood = add_inspection_form.cleaned_data['sealed_brood'],
+                honey = add_inspection_form.cleaned_data['honey'],
+                varroa = add_inspection_form.cleaned_data['varroa'],
+                hive = hive
+            )
+            inspection.save()
+            return redirect("hive_detail", pk=hive.pk)
+
+    return render(request, "add_inspection.html", context)

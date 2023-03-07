@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="container-sm">
+    <br>&nbsp;
+    <h5>Add an inspection to {{ hive.name }}</h5>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" class="form-control">
+    </form>
+    <br>
+</div>
+{% endblock %}
