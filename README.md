@@ -18,4 +18,4 @@ Start the local django server:
 ```
 python manage.py runserver
 ```
-Visit 127.0.0.1:8000 to run the application [127.0.0.1:8000] (127.0.0.1:8000 “127.0.0.1:8000”)
+Visit 127.0.0.1:8000 to run the application [a link](127.0.0.1:8000)
