@@ -35,7 +35,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'hive_detail' hive.pk %}" class="link-secondary">{{ hive.name }}</a></h5>
+            <h5 class="card-title"><a href="{% url 'hive_detail' hive.pk %}" class="link-primary">{{ hive.name }}</a></h5>
             <hr style="color: {{ hive.color }}; height: 10px; margin: 0;">
             <p class="card-text">
                 {{ hive.description | linebreaks }}
@@ -48,7 +48,7 @@
                 <br>
                 Location: {{ hive.location }}
                 <br>
-                <small><a href="{% url 'edit_hive' hive.pk %}" class="link-secondary">edit</a></small>
+                <small><a href="{% url 'edit_hive' hive.pk %}" class="link-primary">edit</a></small>
             </p>
             </div>
         </div>

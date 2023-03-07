@@ -38,7 +38,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title">{{ hive.name }}</h4>
+            <h5 class="card-title">{{ hive.name }}</h5>
             <hr style="color: {{ hive.color }}; height: 10px; margin: 0;">
 
             <p class="card-text">
@@ -59,20 +59,21 @@
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#inspections" type="button" role="tab" aria-controls="home" aria-selected="true">Inspections</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#treatments" type="button" role="tab" aria-controls="profile" aria-selected="false">Treatments</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab" aria-controls="contact" aria-selected="false">Notes</button>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+            <div class="tab-pane fade show active" id="inspections" role="tabpanel" aria-labelledby="home-tab">inspections</div>
+            <div class="tab-pane fade" id="treatments" role="tabpanel" aria-labelledby="profile-tab">treatments</div>
             <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="contact-tab">
                 {% for note in notes %}
+                <br>
                 <div class="card">
                     <div class="card-body">
                     <h6 class="card-title">{{ note.title }} - {{ note.created_on }}</h6>
