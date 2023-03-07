@@ -7,7 +7,7 @@
     <form action="" method="post">
         {% csrf_token %}
         <input type="submit" value="Remove" class="form-control">
-        <a href="{% url 'hive_management' %}" class="link-secondary">Cancel</a>
+        <a href="{% url 'hive_detail' hive.pk %}" class="text-danger">Cancel</a>
     </form>
     <br>
 </div>

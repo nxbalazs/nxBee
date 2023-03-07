@@ -17,7 +17,7 @@ class Hive(models.Model):
 class Inspection(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    created_on = models.DateField(auto_now_add=True)
+    created_on = models.DateField()
     queen = models.BooleanField()
     eggs = models.BooleanField()
     open_brood = models.BooleanField()

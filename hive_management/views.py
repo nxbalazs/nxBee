@@ -110,6 +110,7 @@ def add_inspection(request, pk):
             inspection = Inspection(
                 name = add_inspection_form.cleaned_data['name'],
                 description = add_inspection_form.cleaned_data['description'],
+                created_on = add_inspection_form.cleaned_data['created_on'],
                 queen = add_inspection_form.cleaned_data['queen'],
                 eggs = add_inspection_form.cleaned_data['eggs'],
                 open_brood = add_inspection_form.cleaned_data['open_brood'],
