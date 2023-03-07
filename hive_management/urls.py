@@ -10,5 +10,6 @@ urlpatterns = [
     path('remove_hive/<int:pk>', views.remove_hive, name='remove_hive'),
     path('add_note/<int:pk>', views.add_note, name='add_note'),
     path('add_inspection/<int:pk>', views.add_inspection, name='add_inspection'),
+    path('add_treatment/<int:pk>', views.add_treatment, name='add_treatment'),
     path('donate', views.donate, name='donate'),
 ]

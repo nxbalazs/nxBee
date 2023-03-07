@@ -1,5 +1,5 @@
 from django import forms
-from hive_management.models import Hive, Inspection
+from hive_management.models import Hive, Inspection, Treatment
 
 class AddHiveForm(forms.ModelForm):
     class Meta:
@@ -35,5 +35,17 @@ class AddInspectionForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
             'honey': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Honey'}),
             'varroa': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Varroa'}),
+            'created_on': forms.DateInput(attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}),
+        }
+
+class AddTreatmentForm(forms.ModelForm):
+    class Meta:
+        model = Treatment
+        fields = '__all__'
+        exclude = ('hive',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Treatment Name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
+            'med_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Medicine Name'}),
             'created_on': forms.DateInput(attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}),
         }

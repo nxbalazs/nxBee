@@ -25,7 +25,7 @@
                             <a class="nav-link" href="{% url 'add_inspection' hive.pk %}">Add an inspection to this hive <i class="bi bi-binoculars"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="{% url 'new_hive' %}">Add a treatment to this hive <i class="bi bi-file-medical"></i></a>
+                            <a class="nav-link" href="{% url 'add_treatment' hive.pk %}">Add a treatment to this hive <i class="bi bi-file-medical"></i></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'add_note' hive.pk %}">Add a note to this hive <i class="bi bi-card-text"></i></a>
@@ -116,6 +116,7 @@
 
                     <p class="card-text">
                         {{ treatment.description | linebreaks }}
+                        Meicine: {{ treatment.med_name }}
                     </p>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from hive_management.models import Hive, Note, Inspection, Treatment
-from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm
+from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddTreatmentForm
 
 # Create your views here.
 def homepage(request):
@@ -122,3 +122,25 @@ def add_inspection(request, pk):
             return redirect("hive_detail", pk=hive.pk)
 
     return render(request, "add_inspection.html", context)
+
+def add_treatment(request, pk):
+    hive = Hive.objects.get(pk=pk)
+    context = {
+        'hive': hive,
+        'form': AddTreatmentForm,
+    }
+
+    if request.method == 'POST':
+        add_treatment_form = AddTreatmentForm(request.POST)
+        if add_treatment_form.is_valid():
+            treatment = Treatment(
+                name = add_treatment_form.cleaned_data['name'],
+                description = add_treatment_form.cleaned_data['description'],
+                created_on = add_treatment_form.cleaned_data['created_on'],
+                med_name = add_treatment_form.cleaned_data['med_name'],
+                hive = hive
+            )
+            treatment.save()
+            return redirect("hive_detail", pk=hive.pk)
+
+    return render(request, "add_treatment.html", context)
