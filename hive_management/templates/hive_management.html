@@ -30,9 +30,11 @@
 <br>
 
 <h5>List of Beehives:</h5>
-<div class="row row-cols-1 row-cols-md-5 g-4">
+<div class="row">
+    <div class="col-9">
+        <div class="row row-cols-md-4 g-4">
 {% for hive in hives %}
-    <div class="col">
+    
         <div class="card">
             <div class="card-body">
             <h5 class="card-title"><a href="{% url 'hive_detail' hive.pk %}" class="link-primary">{{ hive.name }}</a></h5>
@@ -53,8 +55,41 @@
             </p>
             </div>
         </div>
-    </div>
+    
 {% endfor %}
+        </div>
+    </div>
+    <div class="col-3">
+
+        <div class="jumbotron">
+            <h4>Reports</h4>
+            <p class="lead">Reports and reminders for you:</p>
+            <hr class="my-4">
+            <p>
+                <div class="alert alert-primary" role="alert">
+                    All good! Every beehive should be ok
+                </div>
+            </p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+          </div>
+
+          <div class="jumbotron">
+            <h4>Reports</h4>
+            <p class="lead">Reports and reminders for you:</p>
+            <hr class="my-4">
+            <p>
+                <div class="alert alert-primary" role="alert">
+                    All good! Every beehive should be ok
+                </div>
+            </p>
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+          </div>
+
+    </div>
 </div>
 <br>&nbsp;
 </div>
