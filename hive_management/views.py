@@ -8,7 +8,7 @@ def homepage(request):
     return render(request, 'homepage.html', {})
 
 def hive_management(request):
-    hives = Hive.objects.all().order_by('-created_on')
+    hives = Hive.objects.all().order_by('name')
     report = reports.check_treatment()
     context = {
         "hives": hives,

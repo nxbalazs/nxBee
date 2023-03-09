@@ -42,7 +42,7 @@
             <p class="lead" style="background-color: {{ hive.color }}; font-size: 5px;">&nbsp;</p>
             <h6 class="card-subtitle mb-2 text-muted">{{ hive.created_on }}</h6>
             <p class="card-text">
-                {{ hive.description | linebreaks }}
+                {{ hive.description | linebreaks | slice:":200" }}...
                 <br>
                 {{ hive.supers }} supers / {{ hive.frames }} frames
                 <br>
@@ -70,12 +70,13 @@
             <p>
                 {% for report in reports %}
                 <a href="{% url 'hive_detail' report.pk %}" class="link-primary">{{ report.name }}</a><br>
+                {% if forloop.last %}
+                <br>
+                <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Why you see this?" data-bs-content="The above listed hives don't have any treatments or the last treatment was 100 days ago">Why i see this?</button>
+                {% endif %}
                 {% empty %}
                 All good! Every beehive should be ok
                 {% endfor %}
-            </p>
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </p>
           </div>
 
@@ -83,7 +84,7 @@
 
           <div class="jumbotron">
             <h4>Stats</h4>
-            <p class="lead">Stats about your beehives:</p>
+            <p class="lead">Stats about your beeyards:</p>
             <hr class="my-4">
             <p>
                 Total hives: {{ hives | length }}<br>
@@ -94,4 +95,10 @@
 </div>
 <br>&nbsp;
 </div>
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
 {% endblock %}
