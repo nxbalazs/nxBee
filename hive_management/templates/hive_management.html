@@ -65,19 +65,22 @@
 
         <div class="jumbotron">
             <h4>Reports and reminders for you:</h4>
-            <p class="lead">You need to treat the following hives:</p>
-            <hr class="my-4">
-            <p>
                 {% for report in reports %}
+                {% if forloop.first %}
+                <p class="lead">You need to treat the following hives:</p>
+                <hr class="my-4">
+                <div class="alert alert-warning" role="alert">
+                {% endif %}
                 <a href="{% url 'hive_detail' report.pk %}" class="link-primary">{{ report.name }}</a><br>
                 {% if forloop.last %}
-                <br>
+                </div>
                 <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Why you see this?" data-bs-content="The above listed hives don't have any treatments or the last treatment was 100 days ago">Why i see this?</button>
                 {% endif %}
                 {% empty %}
-                All good! Every beehive should be ok
+                <div class="alert alert-success" role="alert">
+                    All looks good!
+                </div>
                 {% endfor %}
-            </p>
           </div>
 
           <br>
