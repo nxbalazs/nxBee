@@ -62,27 +62,29 @@
     <div class="col-3">
 
         <div class="jumbotron">
-            <h4>Reports</h4>
-            <p class="lead">Reports and reminders for you:</p>
+            <h4>Reports and reminders for you:</h4>
+            <p class="lead">You need to treat the following hives:</p>
             <hr class="my-4">
             <p>
-                <div class="alert alert-primary" role="alert">
-                    All good! Every beehive should be ok
-                </div>
+                {% for report in reports %}
+                <a href="{% url 'hive_detail' report.pk %}" class="link-primary">{{ report.name }}</a><br>
+                {% empty %}
+                All good! Every beehive should be ok
+                {% endfor %}
             </p>
             <p class="lead">
               <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </p>
           </div>
 
+          <br>
+
           <div class="jumbotron">
-            <h4>Reports</h4>
-            <p class="lead">Reports and reminders for you:</p>
+            <h4>Stats</h4>
+            <p class="lead">Stats about your beehives:</p>
             <hr class="my-4">
             <p>
-                <div class="alert alert-primary" role="alert">
-                    All good! Every beehive should be ok
-                </div>
+                Total hives: 10<br>
             </p>
             <p class="lead">
               <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>

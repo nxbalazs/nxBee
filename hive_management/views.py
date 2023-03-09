@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from hive_management.models import Hive, Note, Inspection, Treatment
 from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddTreatmentForm
+from .utils import reports
 
 # Create your views here.
 def homepage(request):
@@ -8,8 +9,10 @@ def homepage(request):
 
 def hive_management(request):
     hives = Hive.objects.all().order_by('-created_on')
+    report = reports.check_treatment()
     context = {
         "hives": hives,
+        "reports": report,
     }
     return render(request, 'hive_management.html', context)
 
