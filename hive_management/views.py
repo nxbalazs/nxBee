@@ -9,10 +9,12 @@ def homepage(request):
 
 def hive_management(request):
     hives = Hive.objects.all().order_by('name')
+    treatments = Treatment.objects.all()
     report = reports.check_treatment()
     context = {
         "hives": hives,
         "reports": report,
+        "treatments": treatments,
     }
     return render(request, 'hive_management.html', context)
 
