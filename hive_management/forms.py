@@ -2,6 +2,13 @@ from django import forms
 from hive_management.models import Hive, Inspection, Treatment
 
 class AddHiveForm(forms.ModelForm):
+    CHOICES = (
+        ('Honey', 'Honey'),
+        ('Bee', 'Bee'),
+        ('Queen', 'Queen'),
+        ('Test', 'Test'),
+    )
+    purpose = forms.ChoiceField( choices = CHOICES, widget = forms.Select(attrs={'class': 'form-select'}))
     class Meta:
         model = Hive
         fields = '__all__'
@@ -12,8 +19,8 @@ class AddHiveForm(forms.ModelForm):
             'supers': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0'}),
             'frames': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0'}),
             'color': forms.TextInput(attrs={'type': 'color', 'class': 'form-control', 'placeholder': '#000000'}),
-            'purpose': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Purpose'}),
-            'strength': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '90', 'max_value': '100'}),
+            #'purpose': forms.Select(attrs={'class': 'form-select'}),
+            'strength': forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '100', 'step': '5', 'class': 'form-range', 'placeholder': '90', 'max_value': '100'}),
             'created_on': forms.DateInput(attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}),
         }
 
@@ -22,10 +29,10 @@ class NoteForm(forms.Form):
     body = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Leave a note'}))
 
 class AddInspectionForm(forms.ModelForm):
-    queen = forms.BooleanField(initial=True, required=False)
-    eggs = forms.BooleanField(initial=True, required=False)
-    open_brood = forms.BooleanField(initial=True, required=False)
-    sealed_brood = forms.BooleanField(initial=True, required=False)
+    queen = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
+    eggs = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
+    open_brood = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
+    sealed_brood = forms.BooleanField(initial=True, required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     class Meta:
         model = Inspection
         fields = '__all__'
@@ -33,7 +40,7 @@ class AddInspectionForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Inspection title'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
-            'honey': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Honey'}),
+            'honey': forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '100', 'step': '5', 'class': 'form-range', 'placeholder': '90', 'max_value': '100'}),
             'varroa': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Varroa'}),
             'created_on': forms.DateInput(attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd', 'class': 'form-control'}),
         }
