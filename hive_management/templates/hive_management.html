@@ -29,12 +29,14 @@
 
 <br>
 
-<h5>List of Beehives:</h5>
 <div class="row">
     <div class="col-9">
+        <h5>List of Beehives:</h5>
+        <p class="text-end">View: <a class="link" href="#"><i class="bi bi-grid-3x2-gap"></i></a> | <a class="link" href="#"><i class="bi bi-list"></i></a></p>
         <div class="row row-cols-md-4 g-4">
+        {% if view == "grid" %}
             
-{% for hive in hives %}
+        {% for hive in hives %}
         <div class="col-sm-3 mb-2">
         <div class="card" style="border-color: {{ hive.color }};">
             <div class="card-body">
@@ -42,7 +44,7 @@
             <p class="lead" style="background-color: {{ hive.color }}; font-size: 5px;">&nbsp;</p>
             <h6 class="card-subtitle mb-2 text-muted">{{ hive.created_on }}</h6>
             <p class="card-text">
-                {{ hive.description | linebreaks | slice:":200" }}...
+                {{ hive.description | linebreaks | slice:"200" }}...
                 <br>
                 {{ hive.supers }} supers / {{ hive.frames }} frames
                 <br>
@@ -58,23 +60,27 @@
         </div>
         </div>
     
-{% endfor %}
+        {% endfor %}
+
+        {% elif view == "list" %}
+        list
+        {% endif %}
         </div>
     </div>
     <div class="col-3">
 
         <div class="jumbotron">
-            <h4>Reports and reminders for you:</h4>
+            <h4>Reports and reminders:</h4>
+                <hr class="my-4">
                 {% for report in reports %}
                 {% if forloop.first %}
                 <p class="lead">You need to treat the following hives:</p>
-                <hr class="my-4">
                 <div class="alert alert-warning" role="alert">
                 {% endif %}
                 <a href="{% url 'hive_detail' report.pk %}" class="link-primary">{{ report.name }}</a><br>
                 {% if forloop.last %}
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Why you see this?" data-bs-content="The above listed hives don't have any treatments or the last treatment was 100 days ago">Why i see this?</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Why You see this?" data-bs-content="The above listed hives don't have any treatments or the last treatment was made 100 days ago">Why I see this?</button>
                 {% endif %}
                 {% empty %}
                 <div class="alert alert-success" role="alert">
@@ -87,8 +93,8 @@
 
           <div class="jumbotron">
             <h4>Stats</h4>
-            <p class="lead">Stats about your beeyards:</p>
             <hr class="my-4">
+            <p class="lead">Stats about your beeyards:</p>
             <p>
                 Total hives: {{ hives | length }}<br>
                 Total treatments: {{ treatments | length }}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from hive_management.models import Hive, Note, Inspection, Treatment
 from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddTreatmentForm
 from .utils import reports
@@ -15,6 +15,7 @@ def hive_management(request):
         "hives": hives,
         "reports": report,
         "treatments": treatments,
+        "view": 'grid',
     }
     return render(request, 'hive_management.html', context)
 
