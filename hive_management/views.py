@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from hive_management.models import Hive, Note, Inspection, Treatment
 from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddTreatmentForm
 from .utils import reports
@@ -8,6 +8,18 @@ def homepage(request):
     return render(request, 'homepage.html', {})
 
 def hive_management(request):
+    view = request.session.get('view')
+    if view == 'grid' or view == 'list':
+        pass
+    else:
+        request.session['view'] = 'grid'
+        view = request.session.get('view')
+
+    if request.method == 'POST':
+        data = request.POST
+        request.session['view'] = data.get('gridlist')
+        view = request.session.get('view')
+
     hives = Hive.objects.all().order_by('name')
     treatments = Treatment.objects.all()
     report = reports.check_treatment()
@@ -15,7 +27,7 @@ def hive_management(request):
         "hives": hives,
         "reports": report,
         "treatments": treatments,
-        "view": 'grid',
+        "view": view,
     }
     return render(request, 'hive_management.html', context)
 

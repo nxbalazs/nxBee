@@ -32,10 +32,13 @@
 <div class="row">
     <div class="col-9">
         <h5>List of Beehives:</h5>
-        <p class="text-end">View: <a class="link" href="#"><i class="bi bi-grid-3x2-gap"></i></a> | <a class="link" href="#"><i class="bi bi-list"></i></a></p>
-        <div class="row row-cols-md-4 g-4">
+            <form method="POST" class="text-end">
+                {% csrf_token %}
+                View: <button class="link" name="gridlist" value="grid"><i class="bi bi-grid-3x2-gap"></i></button> | <button class="link" name="gridlist" value="list"><i class="bi bi-list"></i></button>
+            </form>
+        
         {% if view == "grid" %}
-            
+        <div class="row row-cols-md-4 g-4">
         {% for hive in hives %}
         <div class="col-sm-3 mb-2">
         <div class="card" style="border-color: {{ hive.color }};">
@@ -62,11 +65,50 @@
     
         {% endfor %}
 
+        </div>
+
         {% elif view == "list" %}
-        list
+        
+        <div class="container">
+            
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">C</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Supers</th>
+                    <th scope="col">Frame</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Strength</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for hive in hives %}
+                  <tr>
+                    <td style="background-color: {{ hive.color }};"></td>
+                    <td><a href="{% url 'hive_detail' hive.pk %}" class="link-primary">{{ hive.name }}</a></td>
+                    <td>{{ hive.created_on }}</td>
+                    <td>{{ hive.description | slice:"10" }}...</td>
+                    <td>{{ hive.supers }}</td>
+                    <td>{{ hive.frames }}</td>
+                    <td>{{ hive.purpose }}</td>
+                    <td>{{ hive.strength }}</td>
+                    <td>{{ hive.location }}</td>
+                    <td><a href="{% url 'edit_hive' hive.pk %}" class="link-primary">edit <i class="bi bi-pencil"></i></a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+        </div>
+
         {% endif %}
         </div>
-    </div>
+
     <div class="col-3">
 
         <div class="jumbotron">
