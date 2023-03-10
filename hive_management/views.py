@@ -22,11 +22,15 @@ def hive_management(request):
 
     hives = Hive.objects.all().order_by('name')
     treatments = Treatment.objects.all()
-    report = reports.check_treatment()
+    inspections = Inspection.objects.all()
+    treatment_reports = reports.check_treatment()
+    inspection_reports = reports.check_inspection()
     context = {
         "hives": hives,
-        "reports": report,
+        "treatment_reports": treatment_reports,
+        "inspection_reports": inspection_reports,
         "treatments": treatments,
+        "inspections": inspections,
         "view": view,
     }
     return render(request, 'hive_management.html', context)

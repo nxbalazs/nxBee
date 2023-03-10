@@ -1,4 +1,4 @@
-from hive_management.models import Hive, Treatment
+from hive_management.models import Hive, Treatment, Inspection
 import datetime
 
 def check_treatment():
@@ -15,3 +15,18 @@ def check_treatment():
         except:
             treatments.append(hive)
     return treatments
+
+def check_inspection():
+    hives = Hive.objects.all()
+    hdays = (datetime.datetime.today() - datetime.timedelta(days=10)).strftime('%Y-%m-%d')
+    inspections = []
+    for hive in hives:
+        try:
+            check_inspection = Inspection.objects.filter(hive=hive).latest('created_on')
+            if check_inspection and str(check_inspection.created_on) >= hdays:
+                pass
+            else: 
+                inspections.append(hive)
+        except:
+            inspections.append(hive)
+    return inspections

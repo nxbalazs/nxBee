@@ -96,7 +96,7 @@
                     <td>{{ hive.supers }}</td>
                     <td>{{ hive.frames }}</td>
                     <td>{{ hive.purpose }}</td>
-                    <td>{{ hive.strength }}</td>
+                    <td>{{ hive.strength }}%</td>
                     <td>{{ hive.location }}</td>
                     <td><a href="{% url 'edit_hive' hive.pk %}" class="link-primary">edit <i class="bi bi-pencil"></i></a></td>
                   </tr>
@@ -114,15 +114,32 @@
         <div class="jumbotron">
             <h4>Reports and reminders:</h4>
                 <hr class="my-4">
-                {% for report in reports %}
+                {% for treatment_report in treatment_reports %}
                 {% if forloop.first %}
                 <p class="lead">You need to treat the following hives:</p>
                 <div class="alert alert-warning" role="alert">
                 {% endif %}
-                <a href="{% url 'hive_detail' report.pk %}" class="link-primary">{{ report.name }}</a><br>
+                <a href="{% url 'hive_detail' treatment_report.pk %}" class="link-primary">{{ treatment_report.name }}</a><br>
                 {% if forloop.last %}
                 </div>
                 <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Why You see this?" data-bs-content="The above listed hives don't have any treatments or the last treatment was made 100 days ago">Why I see this?</button>
+                {% endif %}
+                {% empty %}
+                <div class="alert alert-success" role="alert">
+                    All looks good!
+                </div>
+                {% endfor %}
+
+                {% for inspection_report in inspection_reports %}
+                {% if forloop.first %}
+                <hr class="my-4">
+                <p class="lead">You need to inspect the following hives:</p>
+                <div class="alert alert-warning" role="alert">
+                {% endif %}
+                <a href="{% url 'hive_detail' inspection_report.pk %}" class="link-primary">{{ inspection_report.name }}</a><br>
+                {% if forloop.last %}
+                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Why You see this?" data-bs-content="The above listed hives don't have any inspections or the last inspection was made more then 10 days ago">Why I see this?</button>
                 {% endif %}
                 {% empty %}
                 <div class="alert alert-success" role="alert">
@@ -133,13 +150,16 @@
 
           <br>
 
+          <br>
+
           <div class="jumbotron">
             <h4>Stats</h4>
             <hr class="my-4">
-            <p class="lead">Stats about your beeyards:</p>
+            <p class="lead">Stats about Your activity:</p>
             <p>
-                Total hives: {{ hives | length }}<br>
-                Total treatments: {{ treatments | length }}
+                Number of hives: {{ hives | length }}<br>
+                Number of inspections: {{ inspections | length }}<br>
+                Number of treatments: {{ treatments | length }}
             </p>
           </div>
 
