@@ -167,3 +167,6 @@ def add_treatment(request, pk):
             return redirect("hive_detail", pk=hive.pk)
 
     return render(request, "add_treatment.html", context)
+
+def tutorials(request):
+    return render(request, 'tutorials.html', {})

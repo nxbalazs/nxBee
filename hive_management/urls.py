@@ -12,4 +12,5 @@ urlpatterns = [
     path('add_inspection/<int:pk>', views.add_inspection, name='add_inspection'),
     path('add_treatment/<int:pk>', views.add_treatment, name='add_treatment'),
     path('donate', views.donate, name='donate'),
+    path('tutorials', views.tutorials, name='tutorials'),
 ]
