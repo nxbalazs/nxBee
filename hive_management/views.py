@@ -4,6 +4,7 @@ from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddT
 from .utils import reports
 
 # Create your views here.
+
 def homepage(request):
     return render(request, 'homepage.html', {})
 
@@ -20,7 +21,13 @@ def hive_management(request):
         request.session['view'] = data.get('gridlist')
         view = request.session.get('view')
 
-    hives = Hive.objects.all().order_by('name')
+    if request.method =='GET' and 'loc' in request.GET or 'loc' in request.GET:
+        hives = Hive.objects.filter(location=request.GET['loc']).order_by('name')
+    else:
+        hives = Hive.objects.all().order_by('name')
+
+    # locations:
+    locations = Hive.objects.values_list('location', flat=True).order_by('location').distinct()
     treatments = Treatment.objects.all()
     inspections = Inspection.objects.all()
     treatment_reports = reports.check_treatment()
@@ -32,6 +39,8 @@ def hive_management(request):
         "treatments": treatments,
         "inspections": inspections,
         "view": view,
+        "locations": locations,
+        "c_p": request.get_full_path(),
     }
     return render(request, 'hive_management.html', context)
 

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_content %}
+
 <div class="container-fluid">
 
     <br>
@@ -21,10 +22,11 @@
                       Locations
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        {% for location in locations %}
+                        <li><a class="dropdown-item" href="?loc={{ location }}">{{ location }}</a></li>
+                        {% endfor %}
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'hive_management' %}">Show all</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -45,7 +47,7 @@
         <h5>List of Beehives:</h5>
             <form method="POST" class="text-end">
                 {% csrf_token %}
-                View: <button class="link" name="gridlist" value="grid"><i class="bi bi-grid-3x2-gap"></i></button> | <button class="link" name="gridlist" value="list"><i class="bi bi-list"></i></button>
+                View: <button href="{{ c_p }}" class="link" name="gridlist" value="grid"><i class="bi bi-grid-3x2-gap"></i></button> | <button href="{{ c_p }}" class="link" name="gridlist" value="list"><i class="bi bi-list"></i></button>
             </form>
         
         {% if view == "grid" %}
