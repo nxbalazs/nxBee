@@ -189,7 +189,7 @@ def divide_hives(request):
     if request.method == 'POST':
         post = Hive(
             name = 'New Hive',
-            location = 'Set location',
+            location = 'Not set',
             description = 'New hive created by dividing 3 hives',
             supers = 1,
             frames = 6,
@@ -202,6 +202,7 @@ def divide_hives(request):
         if queen != False:
             queen.frames = queen.frames - 2
             queen.save()
+            # queen.update(frames=queen.frames - 2)
         for hive in hives:
             hive.frames = hive.frames - 2
             hive.save()
