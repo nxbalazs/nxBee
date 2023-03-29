@@ -1,7 +1,10 @@
 # nxBee
 Hive management for beekeepers
 <br>
-Still in development - 07-03-2023
+Manage your beehives: add, edit, delete hives.<br>
+Reminders for inspections and treats.<br>
+
+New features coming soon, still in development.
 
 # Run the application
 To run the application you need python and django
