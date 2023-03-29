@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from hive_management.models import Hive, Note, Inspection, Treatment
 from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddTreatmentForm
-from .utils import reports
+from .utils import reports, divide
 
 # Create your views here.
 
@@ -21,7 +21,7 @@ def hive_management(request):
         request.session['view'] = data.get('gridlist')
         view = request.session.get('view')
 
-    if request.method =='GET' and 'loc' in request.GET or 'loc' in request.GET:
+    if 'loc' in request.GET:
         hives = Hive.objects.filter(location=request.GET['loc']).order_by('name')
     else:
         hives = Hive.objects.all().order_by('name')
@@ -179,3 +179,13 @@ def add_treatment(request, pk):
 
 def tutorials(request):
     return render(request, 'tutorials.html', {})
+
+def divide_hives(request):
+    offer_divide = divide.Divide()
+    queen = offer_divide.make_divided_hive_queen()
+    hives = offer_divide.make_divided_hive()
+    context = {
+        'queen': queen,
+        'hives': hives,
+    }
+    return render(request, 'divide_hives.html', context)

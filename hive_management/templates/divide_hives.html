@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+{% load frames_filter %}
+<br>
+<div class="container-fluid">
+    {% if hives.0 == False %}
+        
+        <div class="alert alert-info" role="alert">
+        Nothing to do
+        </div>
+
+    {% else %}
+
+    <div class="alert alert-primary" role="alert">
+        You should create a new beehive. 
+    </div>
+
+    <div class="row row-cols-md-3 g-3 justify-content-center">
+
+        {% if queen != False %}
+        <div class="col-sm-3 mb-2">
+            <div class="card h-100" style="border-color: {{ queen.color }};">
+                <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'hive_detail' queen.pk %}" class="link-primary">{{ queen.name }}</a></h5>
+                <p class="lead" style="background-color: {{ queen.color }}; font-size: 5px;">&nbsp;</p>
+                <h6 class="card-subtitle mb-2 text-muted">{{ queen.created_on }}</h6>
+                <p class="card-text">
+                    {{ queen.description | linebreaks | slice:"100" }}...
+                    <hr class="my-4">
+                    {{ queen.supers }} supers / {{ queen.frames }} frames <i class="bi bi-arrow-right-short"></i><span class="alert alert-warning" role="alert">{{ queen.frames | new_frames }} frames</span>
+                    <br>
+                    Purpose: {{ queen.purpose }}
+                    <br>
+                    Strength: {{ queen.strength }}%
+                    <br>
+                    Location: {{ queen.location }}
+                </p>
+                </div>
+            </div>
+            </div>
+        {% endif %}
+
+        {% for hive in hives %}
+        <div class="col-sm-3 mb-2">
+        <div class="card h-100" style="border-color: {{ hive.color }};">
+            <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'hive_detail' hive.pk %}" class="link-primary">{{ hive.name }}</a></h5>
+            <p class="lead" style="background-color: {{ hive.color }}; font-size: 5px;">&nbsp;</p>
+            <h6 class="card-subtitle mb-2 text-muted">{{ hive.created_on }}</h6>
+            <p class="card-text">
+                {{ hive.description | linebreaks | slice:"100" }}...
+                <hr class="my-4">
+                {{ hive.supers }} supers / {{ hive.frames }} frames <i class="bi bi-arrow-right-short"></i><span class="alert alert-warning" role="alert">{{ hive.frames | new_frames }} frames</span>
+                <br>
+                Purpose: {{ hive.purpose }}
+                <br>
+                Strength: {{ hive.strength }}%
+                <br>
+                Location: {{ hive.location }}
+            </p>
+            </div>
+        </div>
+        </div>
+    
+        {% endfor %}
+
+                <div class="card h-100" style="border-color: ;">
+                    <div class="card-body">
+                    <h5 class="card-title"><a href="" class="link-primary">New Hive</a></h5>
+                    <p class="lead" style="background-color: ; font-size: 5px;">&nbsp;</p>
+                    <h6 class="card-subtitle mb-2 text-muted">{% now 'DATE_FORMAT' %}</h6>
+                    <p class="card-text">
+                        New hive created by dividing 3 hives
+                        <hr class="my-4">
+                        1 super / 6 frames
+                        <br>
+                        Purpose: New hive
+                        <br>
+                        Strength: 75%
+                        <br>
+                        Location: {{ queen.location }}
+                    </p>
+                    <button type="button" class="btn btn-primary">Create new hive and apply changes</button>
+                    </div>
+                </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+{% endblock %}

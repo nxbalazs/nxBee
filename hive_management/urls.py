@@ -13,4 +13,5 @@ urlpatterns = [
     path('add_treatment/<int:pk>', views.add_treatment, name='add_treatment'),
     path('donate', views.donate, name='donate'),
     path('tutorials', views.tutorials, name='tutorials'),
+    path('divide_hives', views.divide_hives, name='divide_hives')
 ]
