@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from hive_management.models import Hive, Note, Inspection, Treatment
 from hive_management.forms import AddHiveForm, NoteForm, AddInspectionForm, AddTreatmentForm
 from .utils import reports, divide
+import datetime
 
 # Create your views here.
 
@@ -184,6 +185,28 @@ def divide_hives(request):
     offer_divide = divide.Divide()
     queen = offer_divide.make_divided_hive_queen()
     hives = offer_divide.make_divided_hive()
+
+    if request.method == 'POST':
+        post = Hive(
+            name = 'New Hive',
+            location = 'Set location',
+            description = 'New hive created by dividing 3 hives',
+            supers = 1,
+            frames = 6,
+            color = '#ffffff',
+            purpose = 'Test',
+            strength = 75,
+            created_on = datetime.datetime.today().strftime('%Y-%m-%d')
+        )
+        post.save()
+        if queen != False:
+            queen.frames = queen.frames - 2
+            queen.save()
+        for hive in hives:
+            hive.frames = hive.frames - 2
+            hive.save()
+        return redirect("edit_hive", pk=post.pk)
+
     context = {
         'queen': queen,
         'hives': hives,

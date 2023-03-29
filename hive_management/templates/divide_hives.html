@@ -81,7 +81,10 @@
                         <br>
                         Location: {{ queen.location }}
                     </p>
-                    <button type="button" class="btn btn-primary">Create new hive and apply changes</button>
+                    <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Create new hive and apply changes" class="btn btn-primary">
+                    </form>
                     </div>
                 </div>
 
