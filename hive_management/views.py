@@ -199,13 +199,16 @@ def divide_hives(request):
             created_on = datetime.datetime.today().strftime('%Y-%m-%d')
         )
         post.save()
+
         if queen != False:
             queen.frames = queen.frames - 2
             queen.save()
             # queen.update(frames=queen.frames - 2)
+
         for hive in hives:
             hive.frames = hive.frames - 2
             hive.save()
+            
         return redirect("edit_hive", pk=post.pk)
 
     context = {
