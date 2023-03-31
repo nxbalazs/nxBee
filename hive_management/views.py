@@ -216,3 +216,20 @@ def divide_hives(request):
         'hives': hives,
     }
     return render(request, 'divide_hives.html', context)
+
+def search(request):
+    if request.method == "POST":
+        query = request.POST.get('search')
+        if query:
+            hives_found = Hive.objects.filter(name__contains=query)
+            inspections_found = Inspection.objects.filter(name__contains=query)
+            treatments_found = Treatment.objects.filter(name__contains=query)
+            notes_found = Note.objects.filter(title__contains=query)
+
+        context = {
+            'hives': hives_found,
+            'inspections': inspections_found,
+            'treatments': treatments_found,
+            'notes': notes_found,
+        }
+    return render(request, "search.html", context)

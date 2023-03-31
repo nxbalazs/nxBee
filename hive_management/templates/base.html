@@ -31,8 +31,9 @@
                 <a class="nav-link disabled" href="{% url 'donate' %}">Donate</a>
               </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="{% url 'search' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
           </div>

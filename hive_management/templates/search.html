@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<div class="container-sm">
+    <br>&nbsp;
+    <h5>Search result:</h5>
+    <div class="card-group">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Hives:
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for hive in hives %}
+                <li class="list-group-item"><a href="{% url 'hive_detail' hive.pk %}" class="link-primary">{{ hive.name }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Inspections:
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for inspection in inspections %}
+                <li class="list-group-item"><a href="{% url 'hive_detail' inspection.hive.pk %}" class="link-primary">{{ inspection.name }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Treatments:
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for treatment in treatments %}
+                <li class="list-group-item"><a href="{% url 'hive_detail' treatment.hive.pk %}" class="link-primary">{{ treatment.name }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Notes:
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for note in notes %}
+                <li class="list-group-item"><a href="{% url 'hive_detail' note.hive.pk %}" class="link-primary">{{ note.title }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+
+    </div>
+</div>
+{% endblock %}
