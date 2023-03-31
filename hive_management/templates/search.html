@@ -22,7 +22,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 {% for inspection in inspections %}
-                <li class="list-group-item"><a href="{% url 'hive_detail' inspection.hive.pk %}" class="link-primary">{{ inspection.name }}</a></li>
+                <li class="list-group-item"><a href="{% url 'hive_detail' inspection.hive.pk %}" class="link-primary">{{ inspection.name }} - {{ inspection.hive.name }}</a></li>
                 {% endfor %}
             </ul>
           </div>
@@ -33,7 +33,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 {% for treatment in treatments %}
-                <li class="list-group-item"><a href="{% url 'hive_detail' treatment.hive.pk %}" class="link-primary">{{ treatment.name }}</a></li>
+                <li class="list-group-item"><a href="{% url 'hive_detail' treatment.hive.pk %}" class="link-primary">{{ treatment.name }} - {{ treatment.hive.name }}</a></li>
                 {% endfor %}
             </ul>
           </div>
@@ -44,7 +44,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 {% for note in notes %}
-                <li class="list-group-item"><a href="{% url 'hive_detail' note.hive.pk %}" class="link-primary">{{ note.title }}</a></li>
+                <li class="list-group-item"><a href="{% url 'hive_detail' note.hive.pk %}" class="link-primary">{{ note.title }} - {{ note.hive.name }}</a></li>
                 {% endfor %}
             </ul>
           </div>
